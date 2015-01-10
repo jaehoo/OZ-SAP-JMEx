@@ -1,8 +1,8 @@
 package oz.mex;
 
-import junit.extensions.TestSetup;
 import org.junit.Before;
 import org.junit.Test;
+import oz.service.MessageFormatValidator;
 
 /**
  * Created with IntelliJ IDEA.

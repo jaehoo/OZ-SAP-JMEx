@@ -1,4 +1,4 @@
-package oz.mex;
+package oz.service;
 
 import com.sap.mw.jco.JCO;
 import org.slf4j.Logger;

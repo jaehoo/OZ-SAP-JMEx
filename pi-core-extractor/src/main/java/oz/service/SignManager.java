@@ -1,4 +1,4 @@
-package oz.mex;
+package oz.service;
 
 /**
  * Created with IntelliJ IDEA.

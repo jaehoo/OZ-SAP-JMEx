@@ -1,0 +1,4 @@
+
+**** ERROR file opened at 20140708 144115 Hora de verano central (México), SAP-REL 640,0,377 RFC-VER 3  MT-SL
+T:10216 Error in program 'java': ======> Name or password is incorrect (repeat logon)
+T:10216 Error in program 'java': <* RfcReceive [1] : returns 3:RFC_SYS_EXCEPTION

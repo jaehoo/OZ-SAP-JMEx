@@ -1,6 +1,8 @@
 package oz.mex;
 
 import org.junit.Test;
+import oz.service.JCOPayloadExtractor;
+import oz.service.PayloadExtractor;
 
 /**
  * Created with IntelliJ IDEA.

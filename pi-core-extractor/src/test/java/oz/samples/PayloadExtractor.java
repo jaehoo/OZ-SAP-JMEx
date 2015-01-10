@@ -1,3 +1,4 @@
+package oz.samples;
 
 import com.sap.mw.jco.IFunctionTemplate;
 import com.sap.mw.jco.IRepository;
@@ -14,9 +15,11 @@ import com.sap.mw.jco.JCO;
 public class PayloadExtractor {
 
     // The MySAP.com system we gonna be using
-    static final String SID = "XIP";
+    static final String SID = "ERD";
     static final String PID = "PID";
     // The repository we will be using
+
+    private String msgid= "756CEDB2-5800-4F4D-0ADE-93A0CBFCA6D5";
 
     IRepository repository;
     JCO.Field msgkeyField;
@@ -28,8 +31,9 @@ public class PayloadExtractor {
 
             System.out.println("*** Creating the Pool... ***");
 
-
-            JCO.addClientPool(SID, 10, "001", "user", "pwd", "EN", "host", "00");
+            JCO.createClient("CLIENT", "USER", "PASSWORD", "EN", "IP", "41");
+            //JCO.addClientPool(SID, 10, "001", "user", "pwd", "EN", "host", "00");
+            //JCO.Client(SID, 10, "200", "user", "PASS", "EN", "host", "41");
             repository = JCO.createRepository("RecoverRepository", SID);
         } catch (JCO.Exception ex) {
             System.out.println("RecoverXI Caught an exception: \n" + ex);
@@ -44,7 +48,7 @@ public class PayloadExtractor {
 
         // A messageID from your XI/PI
 
-        String key = "54B023A054362230E10080000A0A32A6";
+        String key = "48CD01EB3D27021BE1008000C0A8477D";
 
         final String pipelineID = "CENTRAL";
 
@@ -60,11 +64,10 @@ public class PayloadExtractor {
 
                 JCO.Function function = ftemplate.getFunction();
                 JCO.Client client = JCO.getClient(SID);
-
                 JCO.Structure struct = function.getImportParameterList().getStructure("MESSAGEKEY");
 
-                struct.setValue(key, "MSGID");
-                struct.setValue(pipelineID, "PID");
+                struct.setValue(key, msgid);
+                struct.setValue(pipelineID, PID);
                 // SELECTION must be like this!
                 function.getImportParameterList().getField("SELECTION").setValue("2");
                 // This is the msg version number, where 000 is the first (Inbound); the last can be caught from the function output (see below).

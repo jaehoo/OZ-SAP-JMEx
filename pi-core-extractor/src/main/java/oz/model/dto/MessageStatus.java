@@ -1,4 +1,4 @@
-package oz.dto;
+package oz.model.dto;
 
 /**
  * Created with IntelliJ IDEA.

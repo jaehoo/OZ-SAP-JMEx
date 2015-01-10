@@ -1,12 +1,10 @@
-package oz.mex;
+package oz.service;
 
 import com.sap.mw.jco.JCO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created with IntelliJ IDEA.
