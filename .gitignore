@@ -1,6 +1,6 @@
 .idea/*
 .name
 *.iml
-target/*
-build/*
-.eclipse
+*.class
+target/
+*.trc

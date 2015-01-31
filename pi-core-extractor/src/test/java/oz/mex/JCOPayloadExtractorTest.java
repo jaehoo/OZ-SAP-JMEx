@@ -1,8 +1,7 @@
 package oz.mex;
 
 import org.junit.Test;
-import oz.service.JCOPayloadExtractor;
-import oz.service.PayloadExtractor;
+import oz.service.MessagesExtractor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,14 +13,14 @@ import oz.service.PayloadExtractor;
 public class JCOPayloadExtractorTest {
 
 
-    private PayloadExtractor payloadExtractor;
+    private MessagesExtractor payloadExtractor;
 
     @Test
     public void testGetPayloadByMSGIDs() throws Exception {
 
 
-        payloadExtractor = new JCOPayloadExtractor();
-        //payloadExtractor.getPayloadByMSGIDs(new String[]{"53BC030C-285A-0850-E100-80000A0A35C8"});
+        //payloadExtractor = new JCOMessagesExtractor();
+        //payloadExtractor.getMessagesById(new String[]{"53BC030C-285A-0850-E100-80000A0A35C8"});
 
 
     }

@@ -28,8 +28,7 @@ public class PayloadExtractor {
 
             System.out.println("*** Creating the Pool... ***");
 
-
-            JCO.addClientPool(SID, 10, "001", "user", "pwd", "EN", "host", "00");
+            JCO.addClientPool(SID, 10, "001", "USER", "PASS", "EN", "HOST", "11");
             repository = JCO.createRepository("RecoverRepository", SID);
         } catch (JCO.Exception ex) {
             System.out.println("RecoverXI Caught an exception: \n" + ex);
@@ -44,8 +43,10 @@ public class PayloadExtractor {
 
         // A messageID from your XI/PI
 
-        String key = "54B023A054362230E10080000A0A32A6";
-
+        String key = "54C2136081C30CE0E10080000A0A35C8";
+//54c21360-81c3-0ce0-e100-80000a0a35c8
+//54c21360-81c3-0ce0-e100-80000a0a35c8
+//54C2136081C30CE0E10080000A0A35C8
         final String pipelineID = "CENTRAL";
 
 

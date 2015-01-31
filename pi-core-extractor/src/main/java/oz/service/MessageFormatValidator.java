@@ -2,7 +2,7 @@ package oz.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import oz.model.dto.MessageItem;
+import oz.model.dto.Message;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -24,7 +24,7 @@ public class MessageFormatValidator {
     private ArrayList messages;
 
 
-    public ArrayList<MessageItem> validateIds(String[] msgIds ){
+    public ArrayList<Message> validateIds(String[] msgIds ){
 
         this.messages= new ArrayList();
         String tmsg;
@@ -40,7 +40,7 @@ public class MessageFormatValidator {
 
             matcher= p.matcher(tmsg);
 
-            MessageItem msg;
+            Message msg;
             String nmsg;
             if(matcher.find()){
                 LOG.debug("remove minus sign -");
@@ -51,7 +51,7 @@ public class MessageFormatValidator {
             }
 
                 valMinSize(tmsg);
-                addMessage(new MessageItem(msgId));
+                addMessage(new Message(msgId));
         }
 
         return messages;
@@ -66,7 +66,7 @@ public class MessageFormatValidator {
 
     }
 
-    private void addMessage(MessageItem mit){
+    private void addMessage(Message mit){
 
 
        this.messages.add(mit);
