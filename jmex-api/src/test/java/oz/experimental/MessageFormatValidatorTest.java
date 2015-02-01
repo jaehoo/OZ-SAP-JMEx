@@ -1,4 +1,4 @@
-package oz.mex;
+package oz.experimental;
 
 import org.junit.Before;
 import org.junit.Test;

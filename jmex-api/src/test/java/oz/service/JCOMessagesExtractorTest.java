@@ -54,7 +54,7 @@ public class JCOMessagesExtractorTest {
 
         //Read source
         InputStream is = this.getClass().getClassLoader()
-                .getResourceAsStream("PayloadList.txt");
+                .getResourceAsStream("messagesKeys.txt");
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
 
