@@ -110,11 +110,11 @@ public class SimpleDestinationDataProviderTest {
     {
         //adapt parameters in order to configure a valid destination
         java.util.Properties connectProperties = new Properties();
-        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "pupxici11");
+        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "host");
         connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR,  "11");
         connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "001");
-        connectProperties.setProperty(DestinationDataProvider.JCO_USER,   "JSG00006074");
-        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "Jaehooph01");
+        connectProperties.setProperty(DestinationDataProvider.JCO_USER,   "user");
+        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "pass");
         connectProperties.setProperty(DestinationDataProvider.JCO_LANG,   "en");
         return connectProperties;
     }
