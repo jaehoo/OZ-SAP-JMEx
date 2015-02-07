@@ -6,7 +6,6 @@ import com.sap.mw.jco.JCO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import oz.model.dto.Message;
-import static oz.util.Labels.*;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,6 +13,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import static oz.util.Labels.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -155,7 +156,7 @@ public class JCOMessagesExtractor implements MessagesExtractor {
 
             //String content = "This is the content to write into file";
 
-            File file = new File("/abc/"+filename+".xml");
+            File file = new File("/Volumes/DATA/jaehoo/"+filename+".xml");
 
             // if file doesn't exists, then create it
             if (!file.exists()) {
