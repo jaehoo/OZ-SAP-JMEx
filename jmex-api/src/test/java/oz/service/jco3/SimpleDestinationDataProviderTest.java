@@ -1,19 +1,17 @@
-package oz.service;
+package oz.service.jco3;
 
 import com.sap.conn.jco.*;
-import com.sap.conn.jco.ext.DestinationDataProvider;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Properties;
+import oz.util.CommonUtils;
 
 /**
  * Created by jaehoo on 2/2/15.
  */
-public class SimpleDestinationDataProviderTest {
+public class SimpleDestinationDataProviderTest extends CommonUtils {
 
     public static final Logger log = LoggerFactory.getLogger(SimpleDestinationDataProviderTest.class);
 
@@ -104,19 +102,6 @@ public class SimpleDestinationDataProviderTest {
         log.info(" Echo: {}", exportParamList.getString("ECHOTEXT"));
         log.info(" Response: {}",exportParamList.getString("RESPTEXT"));
 
-    }
-
-    public Properties getDestinationProperties()
-    {
-        //adapt parameters in order to configure a valid destination
-        java.util.Properties connectProperties = new Properties();
-        connectProperties.setProperty(DestinationDataProvider.JCO_ASHOST, "host");
-        connectProperties.setProperty(DestinationDataProvider.JCO_SYSNR,  "11");
-        connectProperties.setProperty(DestinationDataProvider.JCO_CLIENT, "001");
-        connectProperties.setProperty(DestinationDataProvider.JCO_USER,   "user");
-        connectProperties.setProperty(DestinationDataProvider.JCO_PASSWD, "pass");
-        connectProperties.setProperty(DestinationDataProvider.JCO_LANG,   "en");
-        return connectProperties;
     }
 
 }

@@ -1,4 +1,4 @@
-package oz.service;
+package oz.service.jco2;
 
 import com.sap.mw.jco.IFunctionTemplate;
 import com.sap.mw.jco.IRepository;
@@ -6,11 +6,9 @@ import com.sap.mw.jco.JCO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import oz.model.dto.Message;
+import oz.service.FileManager;
+import oz.service.MessagesExtractor;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,7 @@ import static oz.util.Labels.*;
  * Time: 04:36 PM
  * To change this template use File | Settings | File Templates.
  */
-public class JCOMessagesExtractor implements MessagesExtractor {
+public class JCO2MessagesExtractor implements MessagesExtractor {
 
     public static final Logger log = LoggerFactory.getLogger(MessagesExtractor.class);
 
@@ -37,6 +35,9 @@ public class JCOMessagesExtractor implements MessagesExtractor {
     private JCO.ParameterList exportParameterList;
     private JCO.ParameterList importParameterList;
 
+    private FileManager fileManager;
+    private boolean saveFiles;
+
     public void setClient(JCO.Client client) {
         this.client = client;
     }
@@ -45,8 +46,16 @@ public class JCOMessagesExtractor implements MessagesExtractor {
      * Required valid client to initialize connection
      * @param client
      */
-    public JCOMessagesExtractor(JCO.Client client) {
+    public JCO2MessagesExtractor(JCO.Client client) {
         this.client = client;
+    }
+
+    public void setFileManager(FileManager fileManager) {
+        this.fileManager = fileManager;
+    }
+
+    public void setSaveFiles(boolean saveFiles) {
+        this.saveFiles = saveFiles;
     }
 
     /**
@@ -140,7 +149,9 @@ public class JCOMessagesExtractor implements MessagesExtractor {
                 msj.addPayload(payload);
                 log.info("{}", payload);
 
-                //write(payload, key);
+                if(saveFiles && fileManager!= null){
+                    fileManager.save(key,payload);
+                }
 
                 log.info("{} *** END ***", tableParam.getField(NAME.name()).getString());
             }while(tableParam.nextRow());
@@ -151,27 +162,5 @@ public class JCOMessagesExtractor implements MessagesExtractor {
         return msj;
     }
 
-    public void write(String content, String filename){
-        try {
 
-            //String content = "This is the content to write into file";
-
-            File file = new File("/Volumes/DATA/jaehoo/"+filename+".xml");
-
-            // if file doesn't exists, then create it
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-
-            FileWriter fw = new FileWriter(file.getAbsoluteFile());
-            BufferedWriter bw = new BufferedWriter(fw);
-            bw.write(content);
-            bw.close();
-
-            //System.out.println("Done");
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

@@ -1,4 +1,4 @@
-package oz.service;
+package oz.service.jco3;
 
 import com.sap.conn.jco.ext.DataProviderException;
 import com.sap.conn.jco.ext.DestinationDataEventListener;
