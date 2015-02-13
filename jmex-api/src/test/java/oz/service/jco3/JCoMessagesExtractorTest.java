@@ -44,8 +44,7 @@ public class JCoMessagesExtractorTest extends CommonUtils {
         Properties conf = getDestinationProperties();
 
         dataProvider.setProperties(destName,conf);
-
-        fileManager = new FileSystemManger(conf.getProperty("fs.save.path"));
+        fileManager = new FileSystemManger(getPathToSaveFiles());
 
         JCoMessagesExtractor service= new JCoMessagesExtractor(dataProvider, destName);
         service.setSaveFiles(true);

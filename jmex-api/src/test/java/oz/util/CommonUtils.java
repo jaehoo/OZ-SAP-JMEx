@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
@@ -52,4 +55,42 @@ public abstract class CommonUtils {
 
         return list;
     }
+
+    /**
+     *
+     * @return
+     */
+    protected String getPathToSaveFiles(){
+
+
+        DateFormat df =new SimpleDateFormat("yyyyMMdd");
+        Calendar cal = Calendar.getInstance();
+
+        log.info("Today:\t{}", cal.getTime());
+        cal.roll(Calendar.DATE, -1 );
+        log.info("Yesterday:\t{}", cal.getTime());
+        //log.info("Yesterday: {}", cal.get(Calendar.DAY_OF_MONTH));
+
+        String date=df.format(cal.getTime());
+        String defaultPath= System.getProperty("user.home")
+                +File.separator+date+File.separator;
+
+        log.info("Default path:{}", defaultPath);
+
+        return defaultPath;
+
+    }
+
+
+}
+
+class TestUtils extends CommonUtils{
+
+    public static void main(String[] args) {
+
+       TestUtils t = new TestUtils();
+
+
+    }
+
 }

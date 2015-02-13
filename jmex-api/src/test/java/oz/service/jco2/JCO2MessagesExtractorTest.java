@@ -31,10 +31,10 @@ public class JCO2MessagesExtractorTest extends CommonUtils{
         Properties conf = getDestinationProperties();
         client=  JCO.createClient(conf);
 
-        fileManager = new FileSystemManger(conf.getProperty("fs.save.path"));
+        fileManager = new FileSystemManger(getPathToSaveFiles());
 
         JCO2MessagesExtractor service =new JCO2MessagesExtractor(client);
-        service.setSaveFiles(false);
+        service.setSaveFiles(true);
         service.setFileManager(fileManager);
         serviceExtractor = service;
 
@@ -44,8 +44,6 @@ public class JCO2MessagesExtractorTest extends CommonUtils{
     public void testGetMessagesById() throws Exception {
 
         List<String> keys= getKeys();
-        log.info("Size:{} \n {}", keys.size(),keys);
-
         client.connect();
         serviceExtractor.getMessagesById(keys);
         client.disconnect();
@@ -56,7 +54,8 @@ public class JCO2MessagesExtractorTest extends CommonUtils{
     public void testGetMessageById() throws Exception {
 
         client.connect();
-        serviceExtractor.getMessageById("54CC10960AE54140E10s080000A0A32A6");
+
+        serviceExtractor.getMessageById("54dbfca263f00a70e10080000a0a35c8".toUpperCase());
         client.disconnect();
 
     }

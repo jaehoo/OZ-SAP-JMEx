@@ -56,7 +56,6 @@ public class FileSystemManger  implements FileManager{
 
             log.info("Path:{} exists: {}", path, path.exists());
 
-
             if(!path.exists()){
                 path.mkdirs();
             }
