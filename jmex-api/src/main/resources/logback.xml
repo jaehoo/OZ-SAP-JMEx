@@ -39,9 +39,9 @@ Note that the level of the root logger cannot be set to INHERITED or NULL.
 -->
     <!-- <logger level="debug" name="com.bc.control.service.impl.SegmentFactoryValidator" />-->
 
+    <logger name="oz.service.FileSystemManger" level="debug" />
 
     <root level="info">
-
         <appender-ref ref="STDOUT"/>
         <!-- <appender-ref ref="FILE"/>-->
     </root>

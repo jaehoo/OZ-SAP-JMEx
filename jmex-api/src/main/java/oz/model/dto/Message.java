@@ -15,6 +15,7 @@ public class Message {
     private String key;
     private MessageStatus messageStatus;
     private List payloads;
+    private boolean founded;
 
     public Message(String key) {
         this.key = key;
@@ -45,5 +46,19 @@ public class Message {
         this.payloads.add(payload);
     }
 
+    public void setFounded(boolean founded) {
+        this.founded = founded;
+    }
+
+    public boolean isFounded() {
+        return founded;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "key='" + key + '\'' +
+                '}';
+    }
 }
 

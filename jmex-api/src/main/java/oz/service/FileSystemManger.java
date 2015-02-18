@@ -18,11 +18,19 @@ public class FileSystemManger  implements FileManager{
     private String pathName;
     private String fileExtension;
     public static final String defExtension = ".xml";
+    public boolean enabled;
 
     public FileSystemManger(String pathName) {
         this.pathName = pathName;
 
-        //TODO Validate path
+        createPath(pathName);
+    }
+
+    public FileSystemManger(String pathName, boolean enabled) {
+        this.pathName = pathName;
+        this.enabled = enabled;
+
+        createPath(pathName);
     }
 
     public String getPathName() {
@@ -42,23 +50,17 @@ public class FileSystemManger  implements FileManager{
     }
 
     @Override
-    public void save(String fileName, String content) {
+    public void persist(String fileName, String content) {
         try {
-
-            //String content = "This is the content to write into file";
 
             if(fileExtension == null){
                 fileExtension = defExtension;
             }
 
-            File file = new File(pathName+fileName+fileExtension);
-            File path = new File(pathName);
+            String absFile= pathName+fileName+fileExtension;
 
-            log.info("Path:{} exists: {}", path, path.exists());
-
-            if(!path.exists()){
-                path.mkdirs();
-            }
+            File file = new File(absFile);
+            log.debug("{}", absFile);
 
             // if file doesn't exists, then create it
             if (!file.exists()) {
@@ -75,4 +77,25 @@ public class FileSystemManger  implements FileManager{
             log.error(e.getMessage(), e);
         }
     }
+
+    @Override
+    public void enabled(boolean enabled) {
+        this.enabled= enabled;
+    }
+
+    public void createPath(String pathName){
+
+        if(this.enabled){
+            File path = new File(pathName);
+
+            log.info("Path:{} exists: {}", path, path.exists());
+
+            //TODO Validate path
+            if(!path.exists()){
+                path.mkdirs();
+                log.info("** Path Created **");
+            }
+        }
+    }
+
 }

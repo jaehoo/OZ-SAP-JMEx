@@ -2,6 +2,9 @@ package oz.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import oz.model.dto.Message;
+import oz.service.FileManager;
+import oz.service.FileSystemManger;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -17,6 +20,12 @@ import java.util.Properties;
 public abstract class CommonUtils {
 
     public static final Logger log = LoggerFactory.getLogger(CommonUtils.class);
+
+    protected FileManager fileManager;
+
+    protected CommonUtils() {
+        fileManager = new FileSystemManger(getPathToSaveFiles(), true);
+    }
 
     protected Properties getDestinationProperties() throws IOException {
 
@@ -81,6 +90,40 @@ public abstract class CommonUtils {
 
     }
 
+    /**
+     * Print Messages list and their contents
+     * @param messages
+     */
+    public void printMessages(List<Message> messages){
+
+        for(Message m : messages){
+            log.info(m.toString());
+        }
+
+    }
+
+    /**
+     * Save messages
+     * @param messages
+     */
+    protected void persist(List<Message> messages){
+
+        if(fileManager== null){
+            log.info("FileSystemManager is not initialized");
+            return;
+        }
+
+        for(Message m : messages){
+            List<String> payloads=m.getPayloads();
+
+            int version=0;
+            for (String  payload: payloads  ){
+                fileManager.persist(m.getKey() + "-" + version, payload);
+                version+=1;
+            }
+        }
+
+    }
 
 }
 
@@ -88,8 +131,7 @@ class TestUtils extends CommonUtils{
 
     public static void main(String[] args) {
 
-       TestUtils t = new TestUtils();
-
+        TestUtils t = new TestUtils();
 
     }
 

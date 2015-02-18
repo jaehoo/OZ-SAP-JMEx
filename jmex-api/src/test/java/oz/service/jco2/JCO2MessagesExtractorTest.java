@@ -5,10 +5,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import oz.model.dto.Message;
 import oz.service.FileManager;
 import oz.service.FileSystemManger;
 import oz.service.MessagesExtractor;
 import oz.util.CommonUtils;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,22 +24,13 @@ public class JCO2MessagesExtractorTest extends CommonUtils{
     public static final Logger log = LoggerFactory.getLogger(JCO2MessagesExtractorTest.class);
     private MessagesExtractor serviceExtractor;
     private JCO.Client client;
-    private FileManager fileManager;
 
     @Before
     public void setUp() throws IOException {
+
         log.info("Setup test case ====");
-
-        Properties conf = getDestinationProperties();
-        client=  JCO.createClient(conf);
-
-        fileManager = new FileSystemManger(getPathToSaveFiles());
-
-        JCO2MessagesExtractor service =new JCO2MessagesExtractor(client);
-        service.setSaveFiles(true);
-        service.setFileManager(fileManager);
-        serviceExtractor = service;
-
+        client=  JCO.createClient(getDestinationProperties());
+        serviceExtractor = new JCO2MessagesExtractor(client);
     }
 
     @Test
@@ -45,16 +38,19 @@ public class JCO2MessagesExtractorTest extends CommonUtils{
 
         List<String> keys= getKeys();
         client.connect();
-        serviceExtractor.getMessagesById(keys);
+        List<Message> messages = serviceExtractor.getMessagesById(keys);
         client.disconnect();
 
+        assertNotNull(messages);
+
+        log.info("messages list size:{}", messages.size());
+        persist(messages);
     }
 
     @Test
     public void testGetMessageById() throws Exception {
 
         client.connect();
-
         serviceExtractor.getMessageById("54dbfca263f00a70e10080000a0a35c8".toUpperCase());
         client.disconnect();
 

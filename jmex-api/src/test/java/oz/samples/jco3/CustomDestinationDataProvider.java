@@ -23,7 +23,7 @@ import java.util.Properties;
  * application logic. 
  * 
  * This example demonstrates a simple implementation of the DestinationDataProvider interface and shows how
- * to register it. A real world implementation should save the configuration data in a secure way.
+ * to register it. A real world implementation should persist the configuration data in a secure way.
  */
 public class CustomDestinationDataProvider
 {

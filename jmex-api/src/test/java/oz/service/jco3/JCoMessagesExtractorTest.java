@@ -1,10 +1,12 @@
 package oz.service.jco3;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import oz.model.dto.Message;
 import oz.service.FileManager;
 import oz.service.FileSystemManger;
 import oz.service.MessagesExtractor;
@@ -23,7 +25,7 @@ public class JCoMessagesExtractorTest extends CommonUtils {
     private MessagesExtractor extractorService;
     public SimpleDestinationDataProvider dataProvider = new SimpleDestinationDataProvider();
     private String destName = "XIP";
-    private FileManager fileManager;
+
 
     @Before
     public void setUp() throws Exception {
@@ -44,12 +46,7 @@ public class JCoMessagesExtractorTest extends CommonUtils {
         Properties conf = getDestinationProperties();
 
         dataProvider.setProperties(destName,conf);
-        fileManager = new FileSystemManger(getPathToSaveFiles());
-
-        JCoMessagesExtractor service= new JCoMessagesExtractor(dataProvider, destName);
-        service.setSaveFiles(true);
-        service.setFileManager(fileManager);
-        extractorService = service;
+        extractorService = new JCoMessagesExtractor(dataProvider, destName);
 
     }
 
@@ -78,7 +75,10 @@ public class JCoMessagesExtractorTest extends CommonUtils {
     public void testGetMessagesById() throws Exception {
 
         List<String> keys= getKeys();
-        extractorService.getMessagesById(keys);
+        List<Message> messages=extractorService.getMessagesById(keys);
+        Assert.assertNotNull(messages);
+
+        persist(messages);
     }
 
 }

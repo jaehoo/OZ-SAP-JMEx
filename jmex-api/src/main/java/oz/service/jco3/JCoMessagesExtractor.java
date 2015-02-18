@@ -30,20 +30,9 @@ public class JCoMessagesExtractor implements MessagesExtractor{
     private JCoFunction function;
     private JCoDestination destination;
 
-    private FileManager fileManager;
-    private boolean saveFiles;
-
     public JCoMessagesExtractor(DestinationDataProvider desDataProvider, String destinationName) {
         this.desDataProvider = desDataProvider;
         this.destinationName = destinationName;
-    }
-
-    public void setSaveFiles(boolean saveFiles) {
-        this.saveFiles = saveFiles;
-    }
-
-    public void setFileManager(FileManager fileManager) {
-        this.fileManager = fileManager;
     }
 
     @Override
@@ -148,21 +137,16 @@ public class JCoMessagesExtractor implements MessagesExtractor{
             log.info("*** Payload found! ***");
 
             msj = new Message(key);
-
+            msj.setFounded(true);
             do{
                 String payload=new String(tableParam.getByteArray(PAYLOAD.name()));
-                log.info("Message Last Version:{}",  exportParamList.getString(MAXVERSION.name()));
-                log.info("File size: {} bytes", payload.getBytes().length);
-                log.info("{} *** BEGIN ***", tableParam.getString(NAME.name()));
-                msj.addPayload(payload);
-                log.info("{}", payload);
+                log.debug("Message Last Version:{}", exportParamList.getString(MAXVERSION.name()));
+                log.debug("File size: {} bytes", payload.getBytes().length);
+                log.debug("{} *** BEGIN ***", tableParam.getString(NAME.name()));
+                 msj.addPayload(payload);
 
-
-                if(saveFiles && fileManager!= null){
-                    fileManager.save(key,payload);
-                }
-
-                log.info("{} *** END ***", tableParam.getString(NAME.name()));
+                log.debug("{}", payload);
+                log.debug("{} *** END ***", tableParam.getString(NAME.name()));
             }while(tableParam.nextRow());
         }
         else{

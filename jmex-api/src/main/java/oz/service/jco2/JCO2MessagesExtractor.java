@@ -35,9 +35,6 @@ public class JCO2MessagesExtractor implements MessagesExtractor {
     private JCO.ParameterList exportParameterList;
     private JCO.ParameterList importParameterList;
 
-    private FileManager fileManager;
-    private boolean saveFiles;
-
     public void setClient(JCO.Client client) {
         this.client = client;
     }
@@ -48,14 +45,6 @@ public class JCO2MessagesExtractor implements MessagesExtractor {
      */
     public JCO2MessagesExtractor(JCO.Client client) {
         this.client = client;
-    }
-
-    public void setFileManager(FileManager fileManager) {
-        this.fileManager = fileManager;
-    }
-
-    public void setSaveFiles(boolean saveFiles) {
-        this.saveFiles = saveFiles;
     }
 
     /**
@@ -140,20 +129,16 @@ public class JCO2MessagesExtractor implements MessagesExtractor {
             log.info("*** Payload found! ***");
 
             msj = new Message(key);
-
+            msj.setFounded(true);
             do{
-                log.info("Message Last Version:{}",  exportParameterList.getField(MAXVERSION.name()).getString() );
-                log.info("{} *** BEGIN ***", tableParam.getField(NAME.name()).getString());
+                log.debug("Message Last Version:{}",  exportParameterList.getField(MAXVERSION.name()).getString() );
+                log.debug("{} *** BEGIN ***", tableParam.getField(NAME.name()).getString());
 
                 String payload=new String (tableParam.getField(PAYLOAD.name()).getByteArray());
                 msj.addPayload(payload);
-                log.info("{}", payload);
 
-                if(saveFiles && fileManager!= null){
-                    fileManager.save(key,payload);
-                }
-
-                log.info("{} *** END ***", tableParam.getField(NAME.name()).getString());
+                log.debug("{}", payload);
+                log.debug("{} *** END ***", tableParam.getField(NAME.name()).getString());
             }while(tableParam.nextRow());
         }
         else{
