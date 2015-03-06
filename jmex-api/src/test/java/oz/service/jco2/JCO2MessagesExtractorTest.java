@@ -51,7 +51,7 @@ public class JCO2MessagesExtractorTest extends CommonUtils{
     public void testGetMessageById() throws Exception {
 
         client.connect();
-        serviceExtractor.getMessageById("54dbfca263f00a70e10080000a0a35c8".toUpperCase());
+        serviceExtractor.getMessageById("54f70539-4fa51210e10080000a0a325a".toUpperCase());
         client.disconnect();
 
     }

@@ -11,5 +11,13 @@
 
     <artifactId>jmex-gui</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.oz.sap</groupId>
+            <artifactId>jmex-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
 
 </project>

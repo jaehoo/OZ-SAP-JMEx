@@ -22,6 +22,14 @@ public class Message {
         this.payloads= new ArrayList();
     }
 
+    public Message(String key, MessageStatus messageStatus, boolean founded) {
+        this.key = key;
+        this.messageStatus = messageStatus;
+        this.founded = founded;
+    }
+    
+    
+    
     public String getKey() {
         return key;
     }
